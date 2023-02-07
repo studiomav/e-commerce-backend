@@ -33,8 +33,9 @@ router.get('/:id', (req, res) => {
 
 router.post('/', (req, res) => {
   // create a new tag
-  Tag.create(req.body);
-  res.send("Created new tag");
+  Tag.create(req.body).then((tag) => {
+    res.status(200).json(tag);
+  });
 });
 
 router.put('/:id', (req, res) => {
@@ -43,8 +44,9 @@ router.put('/:id', (req, res) => {
     where: {
       id: req.params.id
     }
+  }).then((tag) => {
+    res.status(200).json(tag);
   });
-  res.send("Updated tag");
 });
 
 router.delete('/:id', (req, res) => {
@@ -53,8 +55,9 @@ router.delete('/:id', (req, res) => {
     where: {
       id: req.params.id
     }
+  }).then((tag) => {
+    res.status(200).json(tag);
   });
-  res.send("Deleted tag");
 });
 
 module.exports = router;
